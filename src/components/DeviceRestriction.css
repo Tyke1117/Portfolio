@@ -1,0 +1,163 @@
+/* ========================================================
+   MINIMAL FULL-SCREEN DEVICE RESTRICTION SCREEN
+   Accessible only on Laptops & Desktops (> 1024px)
+   ======================================================== */
+
+.device-restriction-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #000000;
+  color: #f5f0e8;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.device-restriction-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 440px;
+  width: 100%;
+  animation: restrictionFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes restrictionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BRAND LOGO */
+.device-restriction-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 7vw, 2.75rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5f0e8;
+  margin-bottom: 2.25rem;
+  line-height: 1;
+}
+
+.device-restriction-dot {
+  color: #f23838;
+}
+
+/* MINIMAL FLOATING LAPTOP ILLUSTRATION */
+.device-restriction-icon-wrap {
+  width: 110px;
+  height: 75px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: laptopFloat 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes laptopFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-8px);
+  }
+}
+
+.device-restriction-laptop-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.7));
+}
+
+/* HEADLINE */
+.device-restriction-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.5rem, 5.5vw, 1.95rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5f0e8;
+  line-height: 1.15;
+  margin-bottom: 0.85rem;
+}
+
+/* SUBTLE ANIMATED RED UNDERLINE */
+.device-restriction-underline {
+  height: 2px;
+  background-color: #f23838;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 10px rgba(242, 56, 56, 0.4);
+  animation: underlineExpand 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes underlineExpand {
+  0% {
+    width: 0px;
+    opacity: 0;
+  }
+  100% {
+    width: 52px;
+    opacity: 1;
+  }
+}
+
+/* EXPLANATORY BODY TEXT */
+.device-restriction-desc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 300;
+  font-size: clamp(0.92rem, 3.2vw, 1.02rem);
+  line-height: 1.65;
+  color: rgba(245, 240, 232, 0.7);
+  margin-bottom: 2rem;
+  max-width: 360px;
+}
+
+/* MINIMAL BADGE */
+.device-restriction-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.35);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(245, 240, 232, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ========================================================
+   CSS MEDIA QUERIES: STRICT ENFORCEMENT ACROSS VIEWPORTS
+   ======================================================== */
+
+/* On desktops & laptops (> 1024px): completely hide restriction screen */
+@media (min-width: 1025px) {
+  .device-restriction-screen {
+    display: none !important;
+  }
+}
+
+/* On phones & tablets (<= 1024px): completely hide portfolio */
+@media (max-width: 1024px) {
+  .desktop-only-portfolio {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+}

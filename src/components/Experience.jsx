@@ -1,67 +1,125 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { BookOpen, Code, Layers, Rocket } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './Experience.css';
 
 const timelineData = [
   {
-    id: 1,
-    year: '2022-2023',
-    title: 'Getting Started',
+    id: 'exp1',
+    num: 'STAGE 01',
+    period: 'Jan 2025 – Jul 2025',
+    title: 'React Native Developer Intern',
+    company: 'Venom Technologies',
+    location: 'VV Nagar, Anand',
     description:
-      'Began my journey into development by learning programming basics, HTML, CSS, and JavaScript. Built simple static websites and understood how things work on the web.',
-    icon: <BookOpen size={20} />
+      'Developed and contributed to mobile application projects using React Native and Firebase. Worked with real-world software development workflows and contributed to project milestones. Received an Outstanding Final Grade of A (47/50) for performance and technical contributions.',
+    badge: { label: 'Final Grade', value: 'A · 47/50' },
   },
   {
-    id: 2,
-    year: '2024',
-    title: 'Exploring React & Frontend',
+    id: 'exp2',
+    num: 'STAGE 02',
+    period: 'May 2026 – Jun 2026',
+    title: 'Founding Engineer / React Native Intern',
+    company: 'Runiverse',
+    location: 'Remote',
     description:
-      'Started working with React.js and built interactive web applications. Learned component-based architecture and improved my understanding of UI design and user experience.',
-    icon: <Code size={20} />
+      'Developed frontend features for a React Native mobile application. Integrated APIs, managed application state using Zustand, and built responsive UI screens with Mapbox. Supported testing, debugging, and iterative feature improvements.',
+    badge: null,
   },
-  {
-    id: 3,
-    year: '2025',
-    title: 'Building Mobile Apps',
-    description:
-      'Moved into React Native and started building real mobile apps like chat apps, e-commerce apps, and utility apps. Focused on clean UI and smooth user experience.',
-    icon: <Layers size={20} />
-  },
-  {
-    id: 4,
-    year: 'Present',
-    title: 'Exploring AI & Growing',
-    description:
-      'Currently exploring machine learning and improving my development skills by building real-world projects. Learning how to make applications smarter and more useful.',
-    icon: <Rocket size={20} />
-  }
 ];
+
 const Experience = () => {
+  const { scrollYProgress } = useScroll();
+  const lineHeight = useTransform(scrollYProgress, [0.4, 0.75], ['0%', '100%']);
+
   return (
-    <section id="experience" className="section experience-section">
-      <div className="container">
-        <h2 className="section-title">Learning Journey</h2>
-        
-        <div className="timeline">
-          {timelineData.map((item, index) => (
-            <motion.div 
+    <section id="experience" className="experience-scene">
+      <div className="experience-grid-bg" />
+
+      <div className="experience-inner">
+        <div className="experience-header">
+          <motion.span
+            className="gta-label"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            CAREER HISTORY
+          </motion.span>
+          <motion.h2
+            className="scene-heading"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          >
+            THE JOURNEY
+          </motion.h2>
+        </div>
+
+        <div className="experience-timeline">
+          {/* PROGRESSIVE SCROLL-CONTROLLED VERTICAL RED LINE */}
+          <div className="experience-timeline-line">
+            <motion.div
+              style={{
+                width: '100%',
+                height: lineHeight,
+                background: 'var(--red)',
+                boxShadow: '0 0 15px var(--red-glow)',
+                transition: 'height 0.1s linear',
+              }}
+            />
+          </div>
+
+          {timelineData.map((item, idx) => (
+            <motion.div
               key={item.id}
-              className="timeline-item"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="timeline-node"
+              initial={{
+                opacity: 0,
+                x: idx % 2 === 0 ? -45 : 45,
+                rotateY: idx % 2 === 0 ? 8 : -8,
+              }}
+              whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{
+                duration: 0.85,
+                delay: idx * 0.2,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             >
-              <div className="timeline-marker">
-                <div className="timeline-icon">{item.icon}</div>
-                {index !== timelineData.length - 1 && <div className="timeline-line"></div>}
+              {/* MARKER PIN WITH BEACON PULSE */}
+              <motion.div
+                className="timeline-marker-pin"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.2 + 0.3 }}
+              />
+
+              {/* DATE COLUMN */}
+              <div className="timeline-date-col">
+                <span className="timeline-milestone-id">{item.num}</span>
+                <span className="timeline-period-badge">{item.period}</span>
               </div>
-              
-              <div className="timeline-content glass">
-                <span className="timeline-year">{item.year}</span>
-                <h3 className="timeline-title">{item.title}</h3>
-                <p className="timeline-desc">{item.description}</p>
+
+              {/* CONTENT CARD */}
+              <div className="timeline-content-card">
+                <h3 className="timeline-role-title">{item.title}</h3>
+                <p className="timeline-company-row">
+                  {item.company} · {item.location}
+                </p>
+                <p className="timeline-desc-text">{item.description}</p>
+                {item.badge && (
+                  <div className="timeline-grade-badge">
+                    <span className="timeline-grade-label">
+                      {item.badge.label}
+                    </span>
+                    <span className="timeline-grade-val">
+                      {item.badge.value}
+                    </span>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}

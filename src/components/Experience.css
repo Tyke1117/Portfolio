@@ -1,94 +1,286 @@
-.experience-section {
+/* ========================================================
+   EXPERIENCE / CAREER TIMELINE SECTION
+   ======================================================== */
+
+.experience-scene {
   position: relative;
-  z-index: 5;
+  background-color: var(--black);
+  padding: 8rem 0;
+  overflow: hidden;
 }
 
-.timeline {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+.experience-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245, 240, 232, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 240, 232, 0.015) 1px, transparent 1px);
+  background-size: 100px 100px;
+  pointer-events: none;
 }
 
-.timeline-item {
-  display: flex;
-  gap: 2rem;
-}
-
-.timeline-marker {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.timeline-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--accent-primary);
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.experience-inner {
+  position: relative;
   z-index: 2;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  box-sizing: border-box;
 }
 
-.timeline-line {
-  width: 2px;
-  flex-grow: 1;
-  background: linear-gradient(to bottom, var(--accent-primary), transparent);
-  margin-top: 1rem;
-  opacity: 0.5;
+.experience-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 5rem;
 }
 
-.timeline-content {
-  flex-grow: 1;
-  padding: 2rem;
-  border-radius: 20px;
+/* TIMELINE TRACK & ITEMS */
+.experience-timeline {
   position: relative;
-  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+  padding-left: 3rem;
 }
 
-.timeline-content:hover {
-  transform: translateX(10px);
+/* PROGRESSIVE VERTICAL RED LINE */
+.experience-timeline-line {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--red) 0%, rgba(242, 56, 56, 0.25) 85%, transparent 100%);
+  transform-origin: top center;
+  box-shadow: 0 0 10px var(--red-glow);
 }
 
-.timeline-year {
-  display: inline-block;
-  font-size: 0.875rem;
+.timeline-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3.5rem;
+  align-items: flex-start;
+}
+
+/* RED TIMELINE NODE INDICATOR */
+.timeline-marker-pin {
+  position: absolute;
+  left: -3rem;
+  top: 0.6rem;
+  width: 12px;
+  height: 12px;
+  background: var(--red);
+  border-radius: 50%;
+  transform: translateX(-5px);
+  box-shadow: 0 0 0 4px rgba(242, 56, 56, 0.2), 0 0 15px var(--red);
+}
+
+/* DATE COLUMN */
+.timeline-date-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.timeline-period-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 1.45rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  line-height: 1.1;
+}
+
+.timeline-milestone-id {
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  color: var(--accent-primary);
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
 }
 
-.timeline-title {
-  font-size: 1.5rem;
+/* CONTENT CARD */
+.timeline-content-card {
+  background: #111;
+  border: 1px solid rgba(245, 240, 232, 0.08);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.timeline-content-card:hover,
+.timeline-content-card:active {
+  border-color: rgba(242, 56, 56, 0.45);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+  transform: translateY(-2px);
+}
+
+.timeline-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.timeline-role-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--off-white);
+  line-height: 1.1;
+  word-break: break-word;
+}
+
+.timeline-type-pill {
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  background: rgba(242, 56, 56, 0.12);
+  border: 1px solid rgba(242, 56, 56, 0.3);
+  color: var(--red);
+  white-space: nowrap;
 }
 
-.timeline-desc {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+.timeline-company-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
-  .timeline-item {
+.timeline-company-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--off-white);
+}
+
+.timeline-location-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.45);
+}
+
+.timeline-desc-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(245, 240, 232, 0.65);
+  font-weight: 300;
+  border-left: 2px solid rgba(242, 56, 56, 0.3);
+  padding-left: 1.25rem;
+}
+
+.timeline-grade-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0.45rem 1rem;
+  background: rgba(242, 56, 56, 0.12);
+  border: 1px solid rgba(242, 56, 56, 0.4);
+  flex-wrap: wrap;
+}
+
+.timeline-grade-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245, 240, 232, 0.5);
+}
+
+.timeline-grade-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: var(--red);
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN (TABLETS & SMARTPHONES)
+   ======================================================== */
+
+@media (max-width: 900px) {
+  .timeline-node {
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
-  .timeline-icon {
-    width: 40px;
-    height: 40px;
+  .experience-inner {
+    padding: 0 2rem;
   }
-  .timeline-content {
-    padding: 1.5rem;
+  .experience-timeline {
+    gap: 3.5rem;
   }
-  .timeline-title {
+}
+
+@media (max-width: 600px) {
+  .experience-scene {
+    padding: 5rem 0;
+  }
+  .experience-inner {
+    padding: 0 1.25rem;
+  }
+  .experience-header {
+    margin-bottom: 3rem;
+  }
+  .experience-timeline {
+    padding-left: 1.75rem;
+    gap: 3rem;
+  }
+  .timeline-marker-pin {
+    left: -1.75rem;
+  }
+  .timeline-content-card {
+    padding: 1.5rem 1.25rem;
+  }
+  .timeline-role-title {
+    font-size: 1.5rem;
+  }
+  .timeline-desc-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    padding-left: 0.85rem;
+  }
+  .timeline-period-badge {
     font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .experience-inner {
+    padding: 0 0.85rem;
+  }
+  .experience-timeline {
+    padding-left: 1.5rem;
+  }
+  .timeline-marker-pin {
+    left: -1.5rem;
+  }
+  .timeline-content-card {
+    padding: 1.25rem 0.95rem;
+  }
+  .timeline-role-title {
+    font-size: 1.35rem;
   }
 }

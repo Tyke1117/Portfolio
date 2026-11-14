@@ -1,87 +1,262 @@
-.skills-section {
+/* ========================================================
+   SKILLS / THE ARSENAL SECTION - 3D DEPTH & MOVEMENT
+   ======================================================== */
+
+.skills-scene {
   position: relative;
-  z-index: 5;
+  background-color: var(--black);
+  padding: 8rem 0;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.skills-scanline-bg {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(242, 56, 56, 0.015) 3px,
+    rgba(242, 56, 56, 0.015) 4px
+  );
+  pointer-events: none;
+  animation: scanlinesDrift 10s linear infinite;
+}
+
+@keyframes scanlinesDrift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+.skills-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  box-sizing: border-box;
+}
+
+.skills-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 4.5rem;
+}
+
+/* CONNECTIVE RED LASER LINE ACROSS PANELS */
+.skills-connect-line {
+  position: absolute;
+  top: 45%;
+  left: 4rem;
+  right: 4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(242, 56, 56, 0.35), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
-.skill-card {
-  padding: 2rem;
-  border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-}
-
-:root[data-theme='light'] .skill-card:hover {
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-}
-
-.skill-card-header {
+/* TECHNICAL ARSENAL PANELS WITH 3D PERSPECTIVE */
+.arsenal-panel {
+  background: #101010;
+  border: 1px solid rgba(245, 240, 232, 0.08);
+  padding: 2.5rem 2rem;
+  position: relative;
+  overflow: hidden;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.25s ease;
+  min-height: 480px;
+}
+
+.arsenal-panel:hover,
+.arsenal-panel:active {
+  border-color: rgba(242, 56, 56, 0.55);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(242, 56, 56, 0.15);
+}
+
+.arsenal-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), var(--orange));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.arsenal-panel:hover::before,
+.arsenal-panel:active::before {
+  opacity: 1;
+}
+
+.arsenal-panel-header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(245, 240, 232, 0.06);
+}
+
+.arsenal-panel-index {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  color: var(--red);
+}
+
+.arsenal-panel-icon {
+  color: var(--red);
+  filter: drop-shadow(0 0 8px var(--red-glow));
+}
+
+.arsenal-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.85rem, 2.5vw, 2.2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--off-white);
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+
+.arsenal-panel-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(245, 240, 232, 0.55);
+  line-height: 1.6;
+  font-weight: 300;
   margin-bottom: 2rem;
 }
 
-.skill-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--accent-primary);
-}
-
-.skill-card-header h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.skill-list {
+/* TECH STACK LIST */
+.arsenal-tech-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
-.skill-info {
+.arsenal-tech-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  background: #080808;
+  border: 1px solid rgba(245, 240, 232, 0.05);
+  border-left: 2px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.arsenal-tech-item:hover,
+.arsenal-tech-item:active {
+  border-left-color: var(--red);
+  background: #141414;
+  transform: translateX(4px);
+}
+
+.arsenal-tech-name-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
+  align-items: center;
 }
 
-.skill-name {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+.arsenal-tech-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--off-white);
 }
 
-.skill-percent {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--accent-primary);
+.arsenal-tech-badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding: 0.15rem 0.5rem;
+  background: rgba(242, 56, 56, 0.1);
+  border: 1px solid rgba(242, 56, 56, 0.2);
 }
 
-.skill-bar-bg {
-  width: 100%;
-  height: 6px;
-  background-color: var(--bg-secondary);
-  border-radius: 9999px;
-  overflow: hidden;
+.arsenal-tech-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(245, 240, 232, 0.45);
+  line-height: 1.4;
 }
 
-.skill-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent-primary), #8b5cf6);
-  border-radius: 9999px;
+/* ========================================================
+   RESPONSIVE DESIGN (TABLETS & SMARTPHONES)
+   ======================================================== */
+
+@media (max-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .skills-inner {
+    padding: 0 2rem;
+  }
+  .skills-connect-line {
+    display: none;
+  }
+  .arsenal-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .skills-scene {
+    padding: 5rem 0;
+  }
+  .skills-inner {
+    padding: 0 1.25rem;
+  }
+  .skills-header {
+    margin-bottom: 3rem;
+  }
+  .arsenal-panel {
+    padding: 1.75rem 1.25rem;
+  }
+  .arsenal-panel-title {
+    font-size: 1.75rem;
+  }
+  .arsenal-tech-item {
+    padding: 0.75rem 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .skills-inner {
+    padding: 0 0.85rem;
+  }
+  .arsenal-panel {
+    padding: 1.5rem 1rem;
+  }
+  .arsenal-tech-name {
+    font-size: 0.95rem;
+  }
+  .arsenal-tech-badge {
+    font-size: 0.58rem;
+    padding: 0.1rem 0.35rem;
+  }
 }
