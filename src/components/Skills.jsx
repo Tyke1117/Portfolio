@@ -27,7 +27,7 @@ const skillCategories = [
   },
   {
     num: '03',
-    cat: '/ Ecosystem',
+    cat: '/ Eco\nsystem',
     title: 'Backend, State & AI Tools',
     items: [
       { name: 'Firebase Services', role: 'Realtime Database, Cloud Auth & Push Pipelines', focus: 'Production' },
@@ -80,8 +80,8 @@ const ArsenalPanelItem = ({ cat, idx }) => {
           {cat.items.map((item, itemIdx) => (
             <div key={itemIdx} className="arsenal-tech-row">
               <div className="arsenal-tech-meta">
-                <span className="arsenal-tech-name">{item.name}</span>
-                <span className="arsenal-tech-badge">{item.focus}</span>
+                <span className="arsenal-tech-name">{item.name}  </span>
+                <span className="arsenal-tech-badge"> {item.focus}</span>
               </div>
               <p className="arsenal-tech-desc">{item.role}</p>
             </div>

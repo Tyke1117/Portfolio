@@ -53,7 +53,7 @@ const projectsData = [
     github: 'https://github.com/Tyke1117/varuna',
   },
   {
-    id: 'w1',
+    id: 'w2',
     num: '05',
     category: 'web',
     categoryLabel: 'Web Platform',

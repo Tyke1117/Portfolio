@@ -130,7 +130,6 @@
   font-weight: 900;
   font-size: clamp(1.85rem, 2.5vw, 2.2rem);
   text-transform: uppercase;
-  letter-spacing: -0.01em;
   color: var(--off-white);
   line-height: 1.05;
   margin-bottom: 0.75rem;
@@ -192,7 +191,7 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--red);
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.2rem;
   background: rgba(242, 56, 56, 0.1);
   border: 1px solid rgba(242, 56, 56, 0.2);
 }
