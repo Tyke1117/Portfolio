@@ -57,7 +57,7 @@ const Contact = () => {
           </motion.h2>
         </div>
 
-        {/* CINEMATIC GTA ARTWORK BANNER (IN PLACE OF CAR) */}
+        {/* CINEMATIC ANIME ARTWORK BANNER (IN PLACE OF CAR) */}
         <motion.div
           className="contact-visual-banner"
           initial={{ opacity: 0, scale: 0.96 }}
@@ -67,7 +67,7 @@ const Contact = () => {
         >
           <img
             src="/images/anime-cyberpunk.jpg"
-            alt="Cinematic GTA Official Artwork"
+            alt="Cinematic Anime Artwork"
             className="contact-banner-img"
             loading="lazy"
           />
