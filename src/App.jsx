@@ -10,6 +10,7 @@ import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import CinematicCanvas from './components/canvas/CinematicCanvas';
 import DeviceRestriction from './components/DeviceRestriction';
+import CinematicIntro from './components/intro/CinematicIntro';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class ErrorBoundary extends Component {
 }
 
 function App() {
+  const [introActive, setIntroActive] = useState(true);
   const [isDesktop, setIsDesktop] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.innerWidth > 1024;
@@ -54,13 +56,22 @@ function App() {
     };
   }, []);
 
+  const handleIntroComplete = () => {
+    setIntroActive(false);
+  };
+
   return (
     <div className="app-container">
+      {/* CINEMATIC INTRO: FLIPACLIP VFX × GTA × ANIME ACTION (ONCE PER PAGE LOAD) */}
+      {introActive && (
+        <CinematicIntro onComplete={handleIntroComplete} />
+      )}
+
       {/* RESTRICTION SCREEN FOR PHONES & TABLETS (<= 1024px) */}
       {!isDesktop ? (
         <DeviceRestriction />
       ) : (
-        /* EXISTING DESKTOP PORTFOLIO (UNTOUCHED) */
+        /* EXISTING DESKTOP PORTFOLIO (PRESERVED & UNTOUCHED) */
         <div className="desktop-only-portfolio">
           <ErrorBoundary>
             <CinematicCanvas />
